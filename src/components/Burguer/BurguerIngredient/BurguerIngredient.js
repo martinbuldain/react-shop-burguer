@@ -39,4 +39,8 @@ class BurguerIngredient extends Component {
     }
 };
 
+BurguerIngredient.propTypes = {
+    type: PropTypes.string.isRequired
+};
+
 export default BurguerIngredient;
