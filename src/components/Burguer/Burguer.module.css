@@ -1,0 +1,35 @@
+/* Mobile Style */
+.Burguer {
+    width: 100%;
+    margin: auto;
+    height: 250px;
+    /* Just if the burguer height increses, so that the ingredients do not stay outside */
+    overflow: scroll;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* High Mobiles - Portrait mode */
+@media (min-width: 500px) and (min-height: 400px) {
+    .Burguer {
+        width: 350px;
+        height: 300px;
+    }
+}
+
+/* Not too big Screens */
+@media (min-width: 500px) and (min-height: 401px) {
+    .Burguer {
+        width: 450px;
+        height: 400px;
+    }
+}
+
+/* Big Screens */
+@media (min-width: 1000px) and (min-height: 700px) {
+    .Burguer {
+        width: 700px;
+        height: 600px;
+    }
+}
