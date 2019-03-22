@@ -12,13 +12,18 @@ import BurguerIngredient from './BurguerIngredient/BurguerIngredient';
  *  <BurguerIngredient key=cheese1 type=cheese />]
  */
 const burguer = (props) => {
-    const transformedIngredients = Object.keys(props.ingredients).map(ingredientKey => {
+    let transformedIngredients = Object.keys(props.ingredients).map(ingredientKey => {
         return [...Array(props.ingredients[ingredientKey])].map((_, index) => {
             return <BurguerIngredient key={ingredientKey + index} type={ingredientKey} />
         })
-    });
+    }).reduce((arr, el) => {
+        return arr.concat(el)
+    }, []);
+    // I reduce the transformedIngredients array in order to know if there are no ingredients
+    if (transformedIngredients.length == 0) {
+        transformedIngredients = <p>Please start adding Ingredients!</p>
+    }
 
-    console.log(transformedIngredients);
     return (
         <div className={classes.Burguer}>
             <BurguerIngredient type="bread-top" />
