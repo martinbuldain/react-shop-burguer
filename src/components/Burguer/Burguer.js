@@ -20,7 +20,7 @@ const burguer = (props) => {
         return arr.concat(el)
     }, []);
     // I reduce the transformedIngredients array in order to know if there are no ingredients
-    if (transformedIngredients.length == 0) {
+    if (transformedIngredients.length === 0) {
         transformedIngredients = <p>Please start adding Ingredients!</p>
     }
 
