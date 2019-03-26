@@ -19,7 +19,22 @@ class BurguerBuilder extends Component {
             cheese: 0,
             meat: 0
         },
-        totalPrice: 4
+        totalPrice: 4,
+        purchaseable: false
+    }
+
+    /** purchaseable is use to determine if enable or disable Order Button in BuildControls */
+    updatePurchaseState(ingredients) {
+        const sum = Object.keys(ingredients)
+            .map(igKey => {
+                return ingredients[igKey];
+            })
+            .reduce((newSum, el) => {
+                return newSum + el;
+            }, 0);
+        this.setState({
+            purchaseable: sum > 0
+        });
     }
 
     addIngredientHandler = (type) => {
@@ -34,6 +49,7 @@ class BurguerBuilder extends Component {
             ingredients: updatedIngredient,
             totalPrice: newPrice
         });
+        this.updatePurchaseState(updatedIngredient);
     }
     
     /**
@@ -55,7 +71,7 @@ class BurguerBuilder extends Component {
             ingredients: updatedIngredient,
             totalPrice: newPrice
         });
-
+        this.updatePurchaseState(updatedIngredient);
     }
 
     /**
@@ -75,7 +91,8 @@ class BurguerBuilder extends Component {
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHandler}
                     disabled={disabledInfo}
-                    price={this.state.totalPrice} />
+                    price={this.state.totalPrice}
+                    purchaseable={this.state.purchaseable} />
             </Aux>
         );
     }
