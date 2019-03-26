@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Auxiliary';
 import Burguer from '../../components/Burguer/Burguer';
 import BuildControls from '../../components/Burguer/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -40,7 +41,7 @@ class BurguerBuilder extends Component {
     addIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type];
         const updatedCount = oldCount + 1;
-        const updatedIngredient = {...this.state.ingredients};
+        const updatedIngredient = { ...this.state.ingredients };
         updatedIngredient[type] = updatedCount;
         const priceAddition = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
@@ -49,9 +50,12 @@ class BurguerBuilder extends Component {
             ingredients: updatedIngredient,
             totalPrice: newPrice
         });
+        // Due to the way setState works(it takes time to update), it might not update
+        // ingredients when I use ingredients in updatePurchaseState, that is why i have
+        // to send the updatedIngredient to ensure it is the last value
         this.updatePurchaseState(updatedIngredient);
     }
-    
+
     /**
      * If oldCount is negative or 0, do nothing
      * Also I want to disable 'Less' button if oldCount satifies this condition
@@ -62,7 +66,7 @@ class BurguerBuilder extends Component {
             return;
         }
         const updatedCount = oldCount - 1;
-        const updatedIngredient = {...this.state.ingredients};
+        const updatedIngredient = { ...this.state.ingredients };
         updatedIngredient[type] = updatedCount;
         const priceDeduction = INGREDIENT_PRICES[type];
         const oldPrice = this.state.totalPrice;
@@ -71,11 +75,15 @@ class BurguerBuilder extends Component {
             ingredients: updatedIngredient,
             totalPrice: newPrice
         });
+        // Due to the way setState works(it takes time to update), it might not update
+        // ingredients when I use ingredients in updatePurchaseState, that is why i have
+        // to send the updatedIngredient to ensure it is the last value
         this.updatePurchaseState(updatedIngredient);
     }
 
     /**
-     * disabledInfo holds a boolean for each ingredient if it is less than 0
+     * disabledInfo holds a boolean for each ingredient if it is less than 0, then
+     * I should disable button Less
      */
     render() {
         const disabledInfo = {
@@ -86,6 +94,7 @@ class BurguerBuilder extends Component {
         }
         return (
             <Aux>
+                <Modal />
                 <Burguer ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
