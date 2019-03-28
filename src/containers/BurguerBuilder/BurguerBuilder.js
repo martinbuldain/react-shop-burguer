@@ -22,7 +22,8 @@ class BurguerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4,
-        purchaseable: false
+        purchaseable: false,
+        purchasing: false // Para el order button modal
     }
 
     /** purchaseable is use to determine if enable or disable Order Button in BuildControls */
@@ -83,6 +84,15 @@ class BurguerBuilder extends Component {
     }
 
     /**
+     * It will be trigger every time we click the Order  Button
+     */
+    purchaseHandler = () => {
+        this.setState({
+            purchasing: true
+        });
+    }
+
+    /**
      * disabledInfo holds a boolean for each ingredient if it is less than 0, then
      * I should disable button Less
      */
@@ -95,7 +105,7 @@ class BurguerBuilder extends Component {
         }
         return (
             <Aux>
-                <Modal>
+                <Modal show={this.state.purchasing}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burguer ingredients={this.state.ingredients} />
@@ -104,7 +114,8 @@ class BurguerBuilder extends Component {
                     ingredientRemoved={this.removeIngredientHandler}
                     disabled={disabledInfo}
                     price={this.state.totalPrice}
-                    purchaseable={this.state.purchaseable} />
+                    purchaseable={this.state.purchaseable}
+                    ordered={this.purchaseHandler} />
             </Aux>
         );
     }
