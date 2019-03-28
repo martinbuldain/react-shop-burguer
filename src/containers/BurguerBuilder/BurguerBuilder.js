@@ -92,6 +92,12 @@ class BurguerBuilder extends Component {
         });
     }
 
+    purchaseCancelHandler = () => {
+        this.setState({
+            purchasing: false
+        })
+    }
+
     /**
      * disabledInfo holds a boolean for each ingredient if it is less than 0, then
      * I should disable button Less
@@ -105,7 +111,7 @@ class BurguerBuilder extends Component {
         }
         return (
             <Aux>
-                <Modal show={this.state.purchasing}>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burguer ingredients={this.state.ingredients} />
