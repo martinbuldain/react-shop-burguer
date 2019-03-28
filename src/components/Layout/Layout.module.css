@@ -1,3 +1,4 @@
+/* margin-top change from 16px to 72px in order to not overlap Toolbar with Layout <main> Content */
 .Content {
-    margin-top: 16px;
+    margin-top: 72px;
 }
