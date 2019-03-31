@@ -12,6 +12,12 @@ const INGREDIENT_PRICES = {
     bacon: 0.7
 };
 
+/**
+ * I ended up turning Modal into a class based component in order to be able to implement
+ * shouldComponentUpdate() inside Modal.js because in fact, this component should only be render
+ * if this.state.purchasing changes(and send to show variable in Modal.js)
+ */
+
 class BurguerBuilder extends Component {
 
     state = {
