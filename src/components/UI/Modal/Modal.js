@@ -12,9 +12,13 @@ import Backdrop from '../Backdrop/Backdrop';
 class Modal extends Component {
 
     /** I want to ensure that Modal updates only if show property, that dependes on the
-     * the state, changes */
+     * the state, changes 
+     * I also need to see if prop.children, that is for the Spinner, because if is loading when Checkout
+     * it show Spinner else it must show the Order Summary, because the children of Modal changes.
+     * So that it does update if it has new children
+     */
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.show !== this.props.show
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children
     }
 
     render() {
