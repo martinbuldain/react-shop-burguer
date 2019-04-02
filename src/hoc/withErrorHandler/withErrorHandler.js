@@ -13,6 +13,10 @@ import Aux from '../Auxiliary/Auxiliary';
             error: null // I will set the error coming from Firebase
         }
 
+        /** This method is called before children are render.
+         * If I called componentDidMount() it will fail because componentDidMount() executes
+         * after children render
+         */
         componentWillMount () {
             axios.interceptors.request.use(req => {
                 // To clear any previous errors
