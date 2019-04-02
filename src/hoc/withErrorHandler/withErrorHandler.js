@@ -18,14 +18,23 @@ import Aux from '../Auxiliary/Auxiliary';
          * after children render
          */
         componentWillMount () {
-            axios.interceptors.request.use(req => {
+            this.reqInterceptor = axios.interceptors.request.use(req => {
                 // To clear any previous errors
                 this.setState({error: null});
                 return req;
             });
-            axios.interceptors.response.use(res => res, error => {
+            this.resInterceptor = axios.interceptors.response.use(res => res, error => {
                 this.setState({error: error});
             });
+        }
+
+        /**
+         * I need to fire this method in order to clean the memory from interceptors.
+         * That's why I need to store the instance in properties
+         */
+        componentWillUnmount() {
+            axios.interceptor.request.eject(this.reqInterceptor);
+            axios.interceptor.response.eject(this.resInterceptor);
         }
 
         /** Even clear the errors if backdrop is clicked */
