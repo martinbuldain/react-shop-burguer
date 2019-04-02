@@ -18,7 +18,7 @@ class Modal extends Component {
      * So that it does update if it has new children
      */
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.show !== this.props.show || nextProps.children !== this.props.children
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
     render() {
