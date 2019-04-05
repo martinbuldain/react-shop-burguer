@@ -155,8 +155,16 @@ class BurguerBuilder extends Component {
         //             purchasing: false //I also want to close the Modal
         //         })
         //     });
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        }
+        const queryString = queryParams.join('&');
         // Insert a new route into the stack of pages manually
-        this.props.history.push('/checkout');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
 
     /**
