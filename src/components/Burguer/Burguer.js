@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Burguer.module.css';
 import BurguerIngredient from './BurguerIngredient/BurguerIngredient';
+import { withRouter } from 'react-router-dom'; // For passing down Router props from <Route > in App.js
 
 /** I return a div because I want to use the Burguer as a wrapper for all the ingredients
  * So I can give width and hight to this Burguer wrapper.
@@ -33,4 +34,4 @@ const burguer = (props) => {
     );
 }
 
-export default burguer;
+export default withRouter(burguer);

@@ -33,8 +33,8 @@ import Aux from '../Auxiliary/Auxiliary';
          * That's why I need to store the instance in properties
          */
         componentWillUnmount() {
-            axios.interceptor.request.eject(this.reqInterceptor);
-            axios.interceptor.response.eject(this.resInterceptor);
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
         }
 
         /** Even clear the errors if backdrop is clicked */
