@@ -3,6 +3,7 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 
 /**
  * I englobe everything with a div that wraps my entire page because I will use router in here
+ * As this component was loaded with Route, I have access to history object
  */
 class Checkout extends Component {
 
@@ -15,10 +16,22 @@ class Checkout extends Component {
         }
     }
 
+    checkoutCancelledHandler = () => {
+        // It goes to the last page
+        this.props.history.goBack();
+    }
+
+    checkoutContinuedHandler = () => {
+        this.props.history.replace('checkout/contact-data');
+    }
+
     render() {
         return (
             <div>
-                <CheckoutSummary ingredients={this.state.ingredients} />
+                <CheckoutSummary
+                    ingredients={this.state.ingredients}
+                    checkoutCancelled={this.checkoutCancelledHandler}
+                    checkoutContinued={this.checkoutContinuedHandler} />
             </div>
         )
     }
