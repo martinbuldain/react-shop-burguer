@@ -125,40 +125,11 @@ class BurguerBuilder extends Component {
      * Checkout
      */
     purchaseContinueHandler = () => {
-        // this.setState({
-        //     loading: true
-        // })
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //         name: 'Martin B',
-        //         address: {
-        //             street: 'Av. Calipso',
-        //             zipCode: '18867',
-        //             country: 'Argentina'
-        //         },
-        //         email: 'test@test.com',
-        //         deliveryMethod: 'fastest'
-        //     }
-        // }
-        // axios.post('/orders.json', order)
-        //     .then(response => {
-        //         this.setState({
-        //             loading: false,
-        //             purchasing: false //I also want to close the Modal
-        //         })
-        //     })
-        //     .catch(error => {
-        //         this.setState({
-        //             loading: false,
-        //             purchasing: false //I also want to close the Modal
-        //         })
-        //     });
         const queryParams = [];
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
+        queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
         // Insert a new route into the stack of pages manually
         this.props.history.push({
