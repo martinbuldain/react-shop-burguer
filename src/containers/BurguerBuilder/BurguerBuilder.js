@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/Auxiliary/Auxiliary';
-import Burguer from '../../components/Burguer/Burguer';
-import BuildControls from '../../components/Burguer/BuildControls/BuildControls';
-import Modal from '../../components/UI/Modal/Modal';
-import OrderSummary from '../../components/Burguer/OrderSummary/OrderSummary';
-import axios from '../../axios-orders';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import { connect } from 'react-redux';
+import axios from '../../axios-orders';
+import BuildControls from '../../components/Burguer/BuildControls/BuildControls';
+import Burguer from '../../components/Burguer/Burguer';
+import OrderSummary from '../../components/Burguer/OrderSummary/OrderSummary';
+import Modal from '../../components/UI/Modal/Modal';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Aux from '../../hoc/Auxiliary/Auxiliary';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actionTypes from '../../store/actions';
 
 /**
  * I ended up turning Modal into a class based component in order to be able to implement
  * shouldComponentUpdate() inside Modal.js because in fact, this component should only be render
- * if this.state.purchasing changes(and send to show variable in Modal.js)
+ * if this.state.purchasing changes(and send to show variable in Modal.js).
+ * I could set the purchaseable property in the Redux State, but I will leave the aproach of
+ * mixing State UI & Redux State for this case, in the updateStatePurchaseable method
  */
 
 class BurguerBuilder extends Component {
@@ -71,21 +73,8 @@ class BurguerBuilder extends Component {
    * Checkout
    */
   purchaseContinueHandler = () => {
-    const queryParams = [];
-    for (let i in this.state.ingredients) {
-      queryParams.push(
-        encodeURIComponent(i) +
-          '=' +
-          encodeURIComponent(this.state.ingredients[i])
-      );
-    }
-    queryParams.push('price=' + this.state.totalPrice);
-    const queryString = queryParams.join('&');
     // Insert a new route into the stack of pages manually
-    this.props.history.push({
-      pathname: '/checkout',
-      search: '?' + queryString
-    });
+    this.props.history.push('/checkout');
   };
 
   /**
