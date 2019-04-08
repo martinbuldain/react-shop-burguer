@@ -18,7 +18,6 @@ import * as actionTypes from '../../store/actions';
 
 class BurguerBuilder extends Component {
   state = {
-    purchaseable: false,
     purchasing: false, // Para el order button modal
     loading: false,
     error: false
@@ -47,9 +46,7 @@ class BurguerBuilder extends Component {
       .reduce((newSum, el) => {
         return newSum + el;
       }, 0);
-    this.setState({
-      purchaseable: sum > 0
-    });
+    return sum > 0;
   }
 
   /**
@@ -117,7 +114,7 @@ class BurguerBuilder extends Component {
             ingredientRemoved={this.props.onIngredientRemove}
             disabled={disabledInfo}
             price={this.props.price}
-            purchaseable={this.state.purchaseable}
+            purchaseable={this.updatePurchaseState(this.props.ings)}
             ordered={this.purchaseHandler}
           />
         </Aux>
