@@ -8,7 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actionTypes from '../../store/actions/actionTypes';
+import * as burguerBuilderActions from '../../store/actions';
 
 /**
  * I ended up turning Modal into a class based component in order to be able to implement
@@ -144,9 +144,9 @@ const matStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onIngredientAdded: ignName =>
-      dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ignName }),
+      dispatch(burguerBuilderActions.addIngredient(ignName)),
     onIngredientRemove: ignName =>
-      dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName: ignName })
+      dispatch(burguerBuilderActions.removeIngredient(ignName))
   };
 };
 
