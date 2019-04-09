@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from '../../axios-orders';
 import BuildControls from '../../components/Burguer/BuildControls/BuildControls';
 import Burguer from '../../components/Burguer/Burguer';
 import OrderSummary from '../../components/Burguer/OrderSummary/OrderSummary';
@@ -9,6 +8,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as burguerBuilderActions from '../../store/actions';
+import axios from '../../axios-orders';
 
 /**
  * I ended up turning Modal into a class based component in order to be able to implement
@@ -20,24 +20,8 @@ import * as burguerBuilderActions from '../../store/actions';
 
 class BurguerBuilder extends Component {
   state = {
-    purchasing: false, // Para el order button modal
-    loading: false,
-    error: false
+    purchasing: false // Para el order button modal
   };
-
-  componentDidMount() {
-    // axios.get('https://react-my-burger-e97c9.firebaseio.com/ingredients.json')
-    //     .then(response => {
-    //         this.setState({
-    //             ingredients: response.data
-    //         })
-    //     })
-    //     .catch(error => {
-    //         this.setState({
-    //             error: true
-    //         })
-    //     });
-  }
 
   /** purchaseable is use to determine if enable or disable Order Button in BuildControls */
   updatePurchaseState(ingredients) {
@@ -116,9 +100,6 @@ class BurguerBuilder extends Component {
           price={this.props.price}
         />
       );
-      if (this.state.loading) {
-        orderSummary = <Spinner />;
-      }
     }
     return (
       <Aux>
