@@ -23,6 +23,10 @@ class BurguerBuilder extends Component {
     purchasing: false // Para el order button modal
   };
 
+  componentDidMount() {
+    this.props.onInitIngredients();
+  }
+
   /** purchaseable is use to determine if enable or disable Order Button in BuildControls */
   updatePurchaseState(ingredients) {
     const sum = Object.keys(ingredients)
@@ -73,7 +77,7 @@ class BurguerBuilder extends Component {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    let burguer = this.state.error ? (
+    let burguer = this.props.error ? (
       <p>Ingredients can't be loaded!</p>
     ) : (
       <Spinner />
@@ -118,7 +122,8 @@ class BurguerBuilder extends Component {
 const matStateToProps = state => {
   return {
     ings: state.ingredients,
-    price: state.totalPrice
+    price: state.totalPrice,
+    error: state.error
   };
 };
 
@@ -127,7 +132,8 @@ const mapDispatchToProps = dispatch => {
     onIngredientAdded: ignName =>
       dispatch(burguerBuilderActions.addIngredient(ignName)),
     onIngredientRemove: ignName =>
-      dispatch(burguerBuilderActions.removeIngredient(ignName))
+      dispatch(burguerBuilderActions.removeIngredient(ignName)),
+    onInitIngredients: () => dispatch(burguerBuilderActions.initIngredients())
   };
 };
 
