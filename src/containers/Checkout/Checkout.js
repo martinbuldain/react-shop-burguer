@@ -47,7 +47,7 @@ class Checkout extends Component {
 
 const matStateToProps = state => {
   return {
-    ings: state.ingredients
+    ings: state.burguerBuilder.ingredients
   };
 };
 
